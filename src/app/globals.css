@@ -1,0 +1,30 @@
+@import "tailwindcss";
+:root { --paper:#F1ECFF; --ink:#1A1033; --pink:#FF4F7B; --sun:#FFD23F; --mint:#2EC4A0; }
+body { background:var(--paper); color:var(--ink); font-family:"Trebuchet MS","Nirmala UI","Noto Sans Devanagari",system-ui,sans-serif; }
+.card { background:#fff; border:2.5px solid var(--ink); border-radius:18px; box-shadow:5px 5px 0 var(--ink); }
+.btn { display:inline-block; text-align:center; font-weight:800; border:2.5px solid var(--ink); border-radius:14px; padding:.75rem 1.25rem; background:var(--sun); box-shadow:3px 3px 0 var(--ink); cursor:pointer; transition:transform .08s, box-shadow .08s; }
+.btn:active { transform:translate(3px,3px); box-shadow:0 0 0 var(--ink); }
+.btn:disabled { opacity:.5; cursor:not-allowed; }
+.btn-pink { background:var(--pink); color:#fff; } .btn-mint { background:var(--mint); } .btn-white { background:#fff; }
+.field { width:100%; border:2.5px solid var(--ink); border-radius:12px; padding:.65rem .85rem; background:#fff; font-size:1rem; }
+.field:focus-visible, .btn:focus-visible { outline:3px solid var(--pink); outline-offset:2px; }
+.opt { width:100%; text-align:left; font-weight:700; border:2.5px solid var(--ink); border-radius:14px; padding:.9rem 1rem; background:#fff; box-shadow:3px 3px 0 var(--ink); }
+.opt:active, .opt.sel { background:var(--sun); transform:translate(3px,3px); box-shadow:0 0 0 var(--ink); }
+@media (prefers-reduced-motion: reduce) { .btn, .opt { transition:none; } }
+
+/* ---- option tiles & motion ---- */
+.tile { position:relative; display:flex; flex-direction:column; align-items:center; gap:.5rem; padding:.75rem .5rem; border:2.5px solid var(--ink); border-radius:16px; background:#fff; box-shadow:4px 4px 0 var(--ink); font-weight:800; text-align:center; line-height:1.2; cursor:pointer; transition:transform .12s, box-shadow .12s, background .12s; animation:pop .38s backwards; }
+.tile:hover { transform:translateY(-2px); }
+.tile.sel { background:var(--sun); transform:translate(3px,3px); box-shadow:1px 1px 0 var(--ink); }
+.tile.sel::after { content:"✓"; position:absolute; top:-10px; right:-8px; width:26px; height:26px; display:grid; place-items:center; border-radius:999px; background:var(--mint); border:2.5px solid var(--ink); font-size:.8rem; animation:pop .25s backwards; }
+.face { width:4.5rem; height:4.5rem; border-radius:14px; border:2.5px solid var(--ink); background:var(--paper); display:grid; place-items:center; font-size:2.6rem; overflow:hidden; }
+.tile.sel .face { animation:wiggle .5s; }
+.anim-in { animation:slideIn .32s ease-out backwards; }
+.float { animation:floaty 5s ease-in-out infinite; }
+.confetti { position:fixed; top:-2rem; z-index:50; pointer-events:none; animation:fall linear forwards; }
+@keyframes pop { from { opacity:0; transform:scale(.8) translateY(8px); } }
+@keyframes slideIn { from { opacity:0; transform:translateX(28px); } }
+@keyframes floaty { 50% { transform:translateY(-12px) rotate(6deg); } }
+@keyframes wiggle { 25% { transform:rotate(-8deg) scale(1.1); } 60% { transform:rotate(7deg) scale(1.1); } }
+@keyframes fall { to { transform:translateY(110vh) rotate(540deg); } }
+@media (prefers-reduced-motion: reduce) { .tile, .tile.sel::after, .tile.sel .face, .anim-in, .float, .confetti { animation:none; } .confetti { display:none; } }
